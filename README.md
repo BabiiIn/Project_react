@@ -1,1 +1,1 @@
-# Project_react
+# Учебный проект на React
