@@ -1,15 +1,9 @@
-import React from 'react';
-// импортируем массив из mock.js
 import { restaurants } from './mock.js';
 import { createRoot } from 'react-dom/client';
-
-console.log(restaurants); // проверка, что массив импортировался
 
 const root = document.getElementById('root');
 
 const reactRoot = createRoot(root);
-
-// console.log(reactRoot);
 
 function Menu({ items = [] }) {
   const safeMenu = Array.isArray(items) ? items : [];
@@ -58,25 +52,3 @@ reactRoot.render(
     ))}
   </div>
 );
-
-// reactRoot.render(
-//   <div className="some-class" style={{ color: "blue" }}>
-//     {restaurants.map((restaurant) => (
-//       <div key={restaurant.id}>
-//         <p>{restaurant.name}</p>
-//         <h3>Меню</h3>
-//         <ul>
-//           {restaurant.menu.map((item) => (
-//             <li key={item.id}>{item.name}</li>
-//           ))}
-//         </ul>
-//         <h3>Отзывы</h3>
-//         <ul>
-//           {restaurant.reviews.map((review) => (
-//             <li key={review.id}>{review.text}</li>
-//           ))}
-//         </ul>
-//       </div>
-//     ))}
-//   </div>
-// );
