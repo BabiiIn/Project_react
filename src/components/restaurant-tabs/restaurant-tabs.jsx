@@ -10,6 +10,8 @@ export const RestaurantTabs = ({ restaurants = [] }) => {
     return <p>Рестораны пока не загружены.</p>;
   }
 
+  const activeRestaurant = restaurants.find((r) => r.id === activeId);
+
   return (
     <div>
       <div style={{ marginBottom: '1rem' }}>
@@ -31,11 +33,9 @@ export const RestaurantTabs = ({ restaurants = [] }) => {
       </div>
 
       <ul>
-        {restaurants
-          .filter((r) => r.id === activeId)
-          .map((restaurant) => (
-            <RestaurantListItem key={restaurant.id} restaurant={restaurant} />
-          ))}
+        {activeRestaurant && (
+          <RestaurantListItem restaurant={activeRestaurant} />
+        )}
       </ul>
     </div>
   );

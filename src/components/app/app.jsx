@@ -11,7 +11,6 @@ export const App = ({ title }) => {
         <h1>{title}</h1>
         <RestaurantTabs restaurants={restaurants} />
       </div>
-      <div>footer</div>
     </Layout>
   );
 };
