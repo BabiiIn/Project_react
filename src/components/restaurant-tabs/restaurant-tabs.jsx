@@ -32,11 +32,7 @@ export const RestaurantTabs = ({ restaurants = [] }) => {
         ))}
       </div>
 
-      <ul>
-        {activeRestaurant && (
-          <RestaurantListItem restaurant={activeRestaurant} />
-        )}
-      </ul>
+      {activeRestaurant && <RestaurantListItem restaurant={activeRestaurant} />}
     </div>
   );
 };
