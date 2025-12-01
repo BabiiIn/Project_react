@@ -1,6 +1,6 @@
 import { useCounter } from './use-counter';
 
-export const CounterComponent = ({ dishId, isVisible = true }) => {
+export const CounterComponent = ({ _dishId, isVisible = true }) => {
   const { count, increment, decrement, reset } = useCounter(0, 5);
 
   if (!isVisible) {
