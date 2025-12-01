@@ -5,6 +5,6 @@ const root = document.getElementById('root');
 
 const reactRoot = createRoot(root);
 
-reactRoot.render(<App title="Restaurants" style={{}} isVisible />);
+reactRoot.render(<App title="Restaurants" debugScroll={true} style={{}} isVisible />);
 
 console.log(reactRoot);
