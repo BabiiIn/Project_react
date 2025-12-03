@@ -1,8 +1,9 @@
 import { Menu } from '../menu/menu';
 import { Reviews } from '../reviews/reviews';
+import { ReviewForm } from '../review-form/review-form'; // новый импорт
 
 export const RestaurantListItem = ({ restaurant }) => {
-  const { name, menu, reviews } = restaurant;
+  const { id, name, menu, reviews } = restaurant;
 
   if (!name) {
     return null;
@@ -15,6 +16,8 @@ export const RestaurantListItem = ({ restaurant }) => {
       <Menu menu={menu} />
       <h3>Отзывы</h3>
       <Reviews reviews={reviews} />
+
+      <ReviewForm key={id} restaurantId={id} />
     </li>
   );
 };
