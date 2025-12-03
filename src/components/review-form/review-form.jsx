@@ -7,12 +7,15 @@ import {
 } from './use-form';
 import { ReviewCounter } from '../counter/reviewCounter';
 
-export const ReviewForm = () => {
+export const ReviewForm = ({restaurantId}) => {
   const { form, dispatch } = useForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Отзыв для ресторана:', restaurantId);
     console.log('Введённые данные:', form);
+
+    // Здесь в будущем можно отправить отзыв на сервер с restaurantId
     dispatch({ type: CLEAR_ACTION });
   };
 
