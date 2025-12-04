@@ -1,4 +1,4 @@
-import { CounterComponent } from '../counter/counter-component';
+import { DishCounter } from '../counter/dishCounter';
 
 export const Menu = ({ menu = [] }) => {
   const safeMenu = Array.isArray(menu) ? menu : [];
@@ -12,7 +12,7 @@ export const Menu = ({ menu = [] }) => {
       {safeMenu.map((dish) => (
         <li key={dish.id}>
           {dish.name}
-          <CounterComponent dishId={dish.id} />
+          <DishCounter dishId={dish.id} />
         </li>
       ))}
     </ul>
