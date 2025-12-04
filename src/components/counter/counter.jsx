@@ -1,24 +1,38 @@
+import styles from "./counter.module.css";
+
 export const Counter = ({
   count,
   onIncrement,
   onDecrement,
   onReset,
-  label = 'Количество',
+  label = "Количество",
 }) => {
   return (
-    <div>
-      <div style={{ marginBottom: '0.5rem' }}>
+    <div className={styles.counter}>
+      <div className={styles.label}>
         {label}: {count}
       </div>
 
-      <div>
-        <button type="button" onClick={onIncrement}>
+      <div className={styles.controls}>
+        <button
+          type="button"
+          onClick={onIncrement}
+          className={styles.button}
+        >
           +
         </button>
-        <button type="button" onClick={onDecrement}>
+        <button
+          type="button"
+          onClick={onDecrement}
+          className={styles.button}
+        >
           -
         </button>
-        <button type="button" onClick={onReset}>
+        <button
+          type="button"
+          onClick={onReset}
+          className={styles.button}
+        >
           Сброс
         </button>
       </div>
