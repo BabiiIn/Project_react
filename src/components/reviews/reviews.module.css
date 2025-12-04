@@ -1,0 +1,22 @@
+.reviews {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.reviews li {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.author {
+  font-weight: bold;
+  color: #111827;
+}
+
+.text {
+  color: #374151;
+}
