@@ -1,3 +1,6 @@
+import { Review } from "./review";
+import styles from "./reviews.module.css";
+
 export const Reviews = ({ reviews = [] }) => {
   const safeReviews = Array.isArray(reviews) ? reviews : [];
 
@@ -6,9 +9,9 @@ export const Reviews = ({ reviews = [] }) => {
   }
 
   return (
-    <ul>
+    <ul className={styles.reviews}>
       {safeReviews.map((review) => (
-        <li key={review.id}>{review.text}</li>
+        <Review key={review.id} review={review} />
       ))}
     </ul>
   );
