@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { App } from './components/app/app';
+import "./index.css"; // подключаем корневой CSS
 
 const root = document.getElementById('root');
 
