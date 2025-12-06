@@ -1,21 +1,13 @@
 import { restaurants } from '../../constants/mock';
 import { Layout } from '../layout/layout';
-import { RestaurantTabs } from '../restaurant-tabs/restaurant-tabs';
-import { ReviewForm } from '../review-form/review-form';
-import { DebugScrollBlock } from '../scroll-progress/debugScrollBlock';
-import { ScrollProgressContainer } from '../scroll-progress/scrollProgressContainer';
+import { RestaurantsPage } from '../pages/restaurants-page';
+import styles from './app.module.css';
 
 export const App = ({ title, debugScroll = false }) => {
   return (
-    <Layout sidebar={<div>SIDEBAR</div>}>
-      <ScrollProgressContainer />
-
-      <div className="some-class" style={{ color: 'blue' }}>
-        <h1>{title}</h1>
-        <RestaurantTabs restaurants={restaurants} />
-
-        {debugScroll && <DebugScrollBlock height={3000} />}
-      </div>
+    <Layout debugScroll={debugScroll}>
+      <h1 className={styles.appTitle}>{title}</h1>
+      <RestaurantsPage restaurants={restaurants} />
     </Layout>
   );
 };
