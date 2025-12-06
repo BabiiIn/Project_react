@@ -1,5 +1,6 @@
 import { Dish } from './dish';
 import styles from './menu.module.css';
+import cardStyles from './card.module.css';
 
 export const Menu = ({ dishes = [] }) => {
   const safeDishes = Array.isArray(dishes) ? dishes : [];
@@ -11,7 +12,7 @@ export const Menu = ({ dishes = [] }) => {
   return (
     <ul className={styles.menu}>
       {safeDishes.map((dish) => (
-        <li key={dish.id} className={styles.menuItem}>
+        <li key={dish.id} className={cardStyles.card}>
           <Dish dish={dish} />
         </li>
       ))}
