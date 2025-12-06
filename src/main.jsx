@@ -1,11 +1,11 @@
 import { createRoot } from 'react-dom/client';
 import { App } from './components/app/app';
-import "./index.css"; // подключаем корневой CSS
+import "./index.css"; 
 
 const root = document.getElementById('root');
 
 const reactRoot = createRoot(root);
 
 reactRoot.render(
-  <App title="Restaurants" debugScroll={true} style={{}} isVisible />
+  <App title="Restaurants" debugScroll={true} />
 );
