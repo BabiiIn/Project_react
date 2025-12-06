@@ -1,4 +1,5 @@
 import styles from "./counter.module.css";
+import { Button } from "../button/button";
 
 export const Counter = ({
   count,
@@ -10,31 +11,19 @@ export const Counter = ({
   return (
     <div className={styles.counter}>
       <div className={styles.label}>
-        {label}: {count}
+        {label}: <span className={styles.value}>{count}</span>
       </div>
 
       <div className={styles.controls}>
-        <button
-          type="button"
-          onClick={onIncrement}
-          className={styles.button}
-        >
+        <Button type="button" onClick={onIncrement} variant="primary">
           +
-        </button>
-        <button
-          type="button"
-          onClick={onDecrement}
-          className={styles.button}
-        >
+        </Button>
+        <Button type="button" onClick={onDecrement} variant="primary">
           -
-        </button>
-        <button
-          type="button"
-          onClick={onReset}
-          className={styles.button}
-        >
+        </Button>
+        <Button type="button" onClick={onReset} variant="secondary">
           Сброс
-        </button>
+        </Button>
       </div>
     </div>
   );
