@@ -1,6 +1,5 @@
 import { Counter } from './counter';
 
-
 export const ReviewCounter = ({
   value,
   onChange,
@@ -24,8 +23,3 @@ export const ReviewCounter = ({
     />
   );
 };
-
-
-
-
-
