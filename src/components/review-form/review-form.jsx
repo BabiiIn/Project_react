@@ -4,17 +4,18 @@ import {
   UPDATE_TEXT_ACTION,
   UPDATE_RATING_ACTION,
   CLEAR_ACTION,
-} from "./use-form";
-import { ReviewCounter } from "../counter/review-counter";
-import styles from "./reviewForm.module.css";
+} from './use-form';
+import { ReviewCounter } from '../counter/review-counter';
+import styles from './reviewForm.module.css';
+import { Button } from '../button/button'; // импорт нового компонента
 
 export const ReviewForm = ({ restaurantId }) => {
   const { form, dispatch } = useForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Отзыв для ресторана:", restaurantId);
-    console.log("Введённые данные:", form);
+    console.log('Отзыв для ресторана:', restaurantId);
+    console.log('Введённые данные:', form);
 
     // В будущем здесь будет отправка отзыва на сервер
     dispatch({ type: CLEAR_ACTION });
@@ -53,10 +54,16 @@ export const ReviewForm = ({ restaurantId }) => {
       </label>
 
       <div className={styles.buttons}>
-        <button type="submit">Отправить</button>
-        <button type="button" onClick={() => dispatch({ type: CLEAR_ACTION })}>
+        <Button type="submit" variant="primary">
+          Отправить
+        </Button>
+        <Button
+          type="button"
+          variant="secondary"
+          onClick={() => dispatch({ type: CLEAR_ACTION })}
+        >
           Очистить
-        </button>
+        </Button>
       </div>
     </form>
   );
