@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Restaurant } from '../restaurants/restaurant';
 import { Tab } from '../tab/tab';
+import styles from './restaurants-page.module.css';
+
 
 export const RestaurantsPage = ({ restaurants = [] }) => {
   const [activeId, setActiveId] = useState(
@@ -15,7 +17,7 @@ export const RestaurantsPage = ({ restaurants = [] }) => {
 
   return (
     <div>
-      <div style={{ marginBottom: '1rem' }}>
+      <div className={styles.tabsContainer}>
         {restaurants.map((restaurant) => (
           <Tab
             key={restaurant.id}
