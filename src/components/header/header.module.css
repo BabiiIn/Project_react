@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem; /* расстояние между всеми элементами */
+  padding: 0.5rem 1rem;
+  background-color: #f9fafb; /* светлый фон для шапки */
+  border-bottom: 1px solid #e5e7eb; /* тонкая линия снизу */
+}
+
+.title {
+  margin-right: auto; /* заголовок уходит влево, кнопки прижимаются вправо */
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.userName {
+  margin: 0 0.5rem; /* небольшой отступ вокруг имени пользователя */
+  font-weight: 600;
+  color: #374151;
+}
