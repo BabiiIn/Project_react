@@ -1,0 +1,38 @@
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.label {
+  font-weight: 600;
+  color: #111827;
+  margin-right: 0.5rem;
+}
+
+.controls {
+  display: flex;
+  gap: 0.25rem;
+}
+
+/* .button {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #4f46e5;
+  background-color: #fff;
+  color: #4f46e5;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  background-color: #4f46e5;
+  color: #fff;
+} */
+
+.value {
+  min-width: 2rem;
+  text-align: center;
+  font-weight: 600;
+  color: #4f46e5;
+}

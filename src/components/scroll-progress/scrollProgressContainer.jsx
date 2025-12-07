@@ -1,4 +1,3 @@
-// src/components/scroll-progress/scrollProgressContainer.jsx
 import { useScrollProgress } from './useScrollProgress';
 import { ProgressBar } from './progressBar';
 

@@ -1,15 +1,15 @@
-import { useReducer } from 'react';
+import { useReducer } from "react";
 
 const INITIAL_FORM = {
-  name: '',
-  text: '',
+  name: "",
+  text: "",
   rating: 5,
 };
 
-const UPDATE_NAME_ACTION = 'UPDATE_NAME_ACTION';
-const UPDATE_TEXT_ACTION = 'UPDATE_TEXT_ACTION';
-const UPDATE_RATING_ACTION = 'UPDATE_RATING_ACTION';
-const CLEAR_ACTION = 'CLEAR_ACTION';
+const UPDATE_NAME_ACTION = "UPDATE_NAME_ACTION";
+const UPDATE_TEXT_ACTION = "UPDATE_TEXT_ACTION";
+const UPDATE_RATING_ACTION = "UPDATE_RATING_ACTION";
+const CLEAR_ACTION = "CLEAR_ACTION";
 
 const reducer = (state, action) => {
   const { type, payload } = action;

@@ -1,0 +1,25 @@
+.dish {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.price {
+  font-size: 0.9rem;
+  color: #4f46e5;
+}
+
+.counter {
+  margin-left: 1rem;
+}

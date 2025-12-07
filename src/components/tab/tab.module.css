@@ -1,0 +1,11 @@
+.tab {
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #eee;
+  border: 1px solid #999;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #ccc;
+}

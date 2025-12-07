@@ -5,9 +5,11 @@ import {
   UPDATE_RATING_ACTION,
   CLEAR_ACTION,
 } from './use-form';
-import { ReviewCounter } from '../counter/reviewCounter';
+import { ReviewCounter } from '../counter/review-counter';
+import styles from './reviewForm.module.css';
+import { Button } from '../button/button'; // импорт нового компонента
 
-export const ReviewForm = ({restaurantId}) => {
+export const ReviewForm = ({ restaurantId }) => {
   const { form, dispatch } = useForm();
 
   const handleSubmit = (e) => {
@@ -15,20 +17,12 @@ export const ReviewForm = ({restaurantId}) => {
     console.log('Отзыв для ресторана:', restaurantId);
     console.log('Введённые данные:', form);
 
-    // Здесь в будущем можно отправить отзыв на сервер с restaurantId
+    // В будущем здесь будет отправка отзыва на сервер
     dispatch({ type: CLEAR_ACTION });
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '0.75rem',
-        maxWidth: '300px',
-      }}
-    >
+    <form onSubmit={handleSubmit} className={styles.form}>
       <label>
         Имя:
         <input
@@ -59,11 +53,17 @@ export const ReviewForm = ({restaurantId}) => {
         />
       </label>
 
-      <div style={{ display: 'flex', gap: '0.5rem' }}>
-        <button type="submit">Отправить</button>
-        <button type="button" onClick={() => dispatch({ type: CLEAR_ACTION })}>
+      <div className={styles.buttons}>
+        <Button type="submit" variant="primary">
+          Отправить
+        </Button>
+        <Button
+          type="button"
+          variant="secondary"
+          onClick={() => dispatch({ type: CLEAR_ACTION })}
+        >
           Очистить
-        </button>
+        </Button>
       </div>
     </form>
   );
