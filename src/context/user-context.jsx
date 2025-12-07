@@ -1,11 +1,11 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext } from 'react';
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const login = () => setUser({ name: "NotOlga" }); // мок-пользователь
+  const login = () => setUser({ name: 'NotOlga' });
   const logout = () => setUser(null);
 
   return (

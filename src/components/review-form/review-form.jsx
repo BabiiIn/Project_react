@@ -7,12 +7,12 @@ import {
 } from './use-form';
 import { ReviewCounter } from '../counter/review-counter';
 import styles from './reviewForm.module.css';
-import { Button } from '../button/button'; // импорт нового компонента
-import { useUser } from '../../context/user-context'; // импортируем хук
+import { Button } from '../button/button';
+import { useUser } from '../../context/user-context';
 
 export const ReviewForm = ({ restaurantId }) => {
   const { form, dispatch } = useForm();
-  const { user } = useUser(); // достаём пользователя из контекста
+  const { user } = useUser();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +23,6 @@ export const ReviewForm = ({ restaurantId }) => {
     dispatch({ type: CLEAR_ACTION });
   };
 
-// Если пользователь не авторизован — форма не показывается
   if (!user) {
     return null;
   }

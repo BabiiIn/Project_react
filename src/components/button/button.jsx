@@ -1,6 +1,6 @@
 import styles from './button.module.css';
 import classNames from 'classnames';
-import { useTheme } from '../../context/theme-context'; // импортируем хук
+import { useTheme } from '../../context/theme-context';
 
 export const Button = ({
   children,
@@ -10,7 +10,7 @@ export const Button = ({
   className,
   ...props
 }) => {
-  const { theme } = useTheme(); // получаем текущую тему из контекста
+  const { theme } = useTheme();
   return (
     <button
       type={type}
@@ -18,7 +18,7 @@ export const Button = ({
       className={classNames(
         styles.button,
         styles[variant],
-        styles[theme], // добавляем класс темы
+        styles[theme],
         className
       )}
       {...props}

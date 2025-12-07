@@ -1,7 +1,7 @@
 import { useTheme } from '../../context/theme-context';
 import { Button } from '../button/button';
 import { useUser } from '../../context/user-context';
-import styles from "./header.module.css";
+import styles from './header.module.css';
 
 export const Header = () => {
   const { toggleTheme } = useTheme();
