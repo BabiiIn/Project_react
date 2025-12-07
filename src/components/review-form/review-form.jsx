@@ -8,9 +8,11 @@ import {
 import { ReviewCounter } from '../counter/review-counter';
 import styles from './reviewForm.module.css';
 import { Button } from '../button/button'; // импорт нового компонента
+import { useUser } from '../../context/user-context'; // импортируем хук
 
 export const ReviewForm = ({ restaurantId }) => {
   const { form, dispatch } = useForm();
+  const { user } = useUser(); // достаём пользователя из контекста
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +22,11 @@ export const ReviewForm = ({ restaurantId }) => {
     // В будущем здесь будет отправка отзыва на сервер
     dispatch({ type: CLEAR_ACTION });
   };
+
+// Если пользователь не авторизован — форма не показывается
+  if (!user) {
+    return null;
+  }
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
