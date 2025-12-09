@@ -1,5 +1,6 @@
 import styles from './button.module.css';
 import classNames from 'classnames';
+import { useTheme } from '../../context/theme-context';
 
 export const Button = ({
   children,
@@ -9,11 +10,17 @@ export const Button = ({
   className,
   ...props
 }) => {
+  const { theme } = useTheme();
   return (
     <button
       type={type}
       onClick={onClick}
-      className={classNames(styles.button, styles[variant], className)}
+      className={classNames(
+        styles.button,
+        styles[variant],
+        styles[theme],
+        className
+      )}
       {...props}
     >
       {children}

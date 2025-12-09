@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.title {
+  margin-right: auto;
+  font-weight: 700;
+  color: #111827;
+}
+
+.userName {
+  margin: 0 0.5rem;
+  font-weight: 600;
+  color: #374151;
+}

@@ -7,10 +7,12 @@ import {
 } from './use-form';
 import { ReviewCounter } from '../counter/review-counter';
 import styles from './reviewForm.module.css';
-import { Button } from '../button/button'; // импорт нового компонента
+import { Button } from '../button/button';
+import { useUser } from '../../context/user-context';
 
 export const ReviewForm = ({ restaurantId }) => {
   const { form, dispatch } = useForm();
+  const { user } = useUser();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +22,10 @@ export const ReviewForm = ({ restaurantId }) => {
     // В будущем здесь будет отправка отзыва на сервер
     dispatch({ type: CLEAR_ACTION });
   };
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>

@@ -1,13 +1,16 @@
-/* Сброс базовых стилей */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Глобальные настройки */
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
   background-color: #f3f4f6;
   color: #111827;
   line-height: 1.5;

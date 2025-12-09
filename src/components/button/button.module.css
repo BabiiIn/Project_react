@@ -3,7 +3,9 @@
   padding: 0.5rem 1rem;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
   border: none;
 }
 
@@ -25,4 +27,25 @@
 
 .secondary:hover {
   background-color: #d1d5db;
+}
+
+/* ===== Темы ===== */
+
+/* Тема по умолчанию */
+.default {
+  /* например, стандартный стиль */
+  box-shadow: none;
+}
+
+/* Альтернативная тема */
+.alternative {
+  /* более контрастный стиль */
+  border: 2px solid #111827;
+  border-radius: 20px;
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+.alternative:hover {
+  background-color: #f3f4f6;
 }
