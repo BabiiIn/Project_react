@@ -10,7 +10,7 @@ export const Cart = () => {
   const dishes = useSelector((state) => state.dishes);
 
   if (!user) {
-    return null; 
+    return null;
   }
 
   const dishIds = Object.keys(cartItems);
@@ -40,9 +40,8 @@ export const Cart = () => {
         <strong>Итого:</strong> {total} ₽
       </div>
 
-      {/* 👇 кнопка очистки корзины */}
-      <button 
-        className={styles.clearButton} 
+      <button
+        className={styles.clearButton}
         onClick={() => dispatch(clearCart())}
       >
         Очистить корзину

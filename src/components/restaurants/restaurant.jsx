@@ -7,7 +7,6 @@ import styles from './restaurant.module.css';
 export const Restaurant = ({ restaurant }) => {
   const { id, name, menu, reviews } = restaurant;
 
-  // достаём все блюда и отзывы из Redux
   const dishes = useSelector((state) => state.dishes);
   const reviewsData = useSelector((state) => state.reviews);
 
@@ -20,14 +19,13 @@ export const Restaurant = ({ restaurant }) => {
       <h2>{name}</h2>
       <section>
         <h3>Меню</h3>
-        {/* <Menu dishes={menu} /> */}
-        {/* превращаем список id в список объектов */}
+
         <Menu dishes={menu.map((dishId) => dishes[dishId])} />
       </section>
 
       <section>
         <h3>Отзывы</h3>
-        {/* <Reviews reviews={reviews} /> */}
+
         <Reviews reviews={reviews.map((reviewId) => reviewsData[reviewId])} />
         <ReviewForm key={id} restaurantId={id} />
       </section>

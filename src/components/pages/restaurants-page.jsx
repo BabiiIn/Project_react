@@ -1,14 +1,12 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux'; // 👈 добавляем
+import { useSelector } from 'react-redux';
 import { Restaurant } from '../restaurants/restaurant';
 import { Tab } from '../tab/tab';
 import styles from './restaurants-page.module.css';
 
 export const RestaurantsPage = () => {
-  // достаём рестораны из Redux
   const restaurants = useSelector((state) => state.restaurants);
 
-  // превращаем объект в массив
   const restaurantsArray = Object.values(restaurants);
 
   const [activeId, setActiveId] = useState(

@@ -1,10 +1,7 @@
 import { useSelector } from 'react-redux';
 import styles from './review.module.css';
 
-// export const Review = ({ review }) => {
-
 export const Review = ({ review }) => {
-  // достаём пользователя по userId
   const user = useSelector((state) => state.users[review.userId]);
 
   return (
