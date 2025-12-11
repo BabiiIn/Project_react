@@ -1,8 +1,15 @@
-import { useCounter } from "./use-counter";
-import { Counter } from "./counter";
+import { useDispatch, useSelector } from 'react-redux';
+import { Counter } from './counter';
+import {
+  addToCart,
+  removeFromCart,
+  resetDish,
+} from '../../redux/entities/cart/cartSlice';
 
 export const DishCounter = ({ _dishId, isVisible = true }) => {
-  const { count, increment, decrement, reset } = useCounter(0, 5, 0); 
+  const dispatch = useDispatch();
+
+  const count = useSelector((state) => state.cart.items[_dishId] || 0);
 
   if (!isVisible) {
     return null;
@@ -11,9 +18,9 @@ export const DishCounter = ({ _dishId, isVisible = true }) => {
   return (
     <Counter
       count={count}
-      onIncrement={increment}
-      onDecrement={decrement}
-      onReset={reset}
+      onIncrement={() => dispatch(addToCart(_dishId))}
+      onDecrement={() => dispatch(removeFromCart(_dishId))}
+      onReset={() => dispatch(resetDish(_dishId))}
     />
   );
 };
