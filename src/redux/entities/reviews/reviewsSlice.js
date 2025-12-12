@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createSelector } from '@reduxjs/toolkit';
 import { normalizedReviews } from '../../../constants/normalized-mock';
-import { arrayToObject } from '../../../utils/normalize';
+import { normalizeArray } from '../../../utils/normalize';
 
-const initialState = arrayToObject(normalizedReviews);
+const initialState = normalizeArray(normalizedReviews);
 
 const reviewsSlice = createSlice({
   name: 'reviews',
@@ -10,10 +10,34 @@ const reviewsSlice = createSlice({
   reducers: {
     addReview: (state, action) => {
       const review = action.payload;
-      state[review.id] = review;
+      state.ids.push(review.id);
+      state.entities[review.id] = review;
     },
   },
 });
+
+// --- Селекторы ---
+const selectReviewsState = (state) => state.reviews;
+
+export const selectReviewIds = createSelector(
+  [selectReviewsState],
+  (reviews) => reviews.ids
+);
+
+export const selectReviewEntities = createSelector(
+  [selectReviewsState],
+  (reviews) => reviews.entities
+);
+
+export const selectReviewById = createSelector(
+  [selectReviewEntities, (_, id) => id],
+  (entities, id) => entities[id]
+);
+
+export const selectReviewsArray = createSelector(
+  [selectReviewIds, selectReviewEntities],
+  (ids, entities) => ids.map((id) => entities[id])
+);
 
 export const { addReview } = reviewsSlice.actions;
 export default reviewsSlice.reducer;

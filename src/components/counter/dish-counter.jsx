@@ -4,12 +4,15 @@ import {
   addToCart,
   removeFromCart,
   resetDish,
+  selectCartItemById,
 } from '../../redux/entities/cart/cartSlice';
 
-export const DishCounter = ({ _dishId, isVisible = true }) => {
+export const DishCounter = ({ dishId, isVisible = true }) => {
   const dispatch = useDispatch();
 
-  const count = useSelector((state) => state.cart.items[_dishId] || 0);
+  // Получаем объект товара из корзины через селектор
+  const cartItem = useSelector((state) => selectCartItemById(state, dishId));
+  const count = cartItem ? cartItem.count : 0;
 
   if (!isVisible) {
     return null;
@@ -18,9 +21,9 @@ export const DishCounter = ({ _dishId, isVisible = true }) => {
   return (
     <Counter
       count={count}
-      onIncrement={() => dispatch(addToCart(_dishId))}
-      onDecrement={() => dispatch(removeFromCart(_dishId))}
-      onReset={() => dispatch(resetDish(_dishId))}
+      onIncrement={() => dispatch(addToCart(dishId))}
+      onDecrement={() => dispatch(removeFromCart(dishId))}
+      onReset={() => dispatch(resetDish(dishId))}
     />
   );
 };

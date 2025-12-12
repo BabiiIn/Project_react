@@ -1,9 +1,9 @@
 import { Layout } from '../layout/layout';
 import { RestaurantsPage } from '../pages/restaurants-page';
 import styles from './app.module.css';
-import { ThemeProvider } from '../../context/theme-context';
+import { ThemeProvider } from '../../context/theme-provider';   
 import { Header } from '../header/header';
-import { UserProvider } from '../../context/user-context';
+import { UserProvider } from '../../context/user-provider';     
 import { Provider } from 'react-redux';
 import { store } from '../../redux/store';
 
