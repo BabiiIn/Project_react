@@ -17,22 +17,13 @@ const restaurantsSlice = createSlice({
 });
 
 // --- Селекторы ---
-const selectRestaurantsState = (state) => state.restaurants;
+export const selectRestaurantsState = (state) => state.restaurants;
 
-export const selectRestaurantIds = createSelector(
-  [selectRestaurantsState],
-  (restaurants) => restaurants.ids
-);
+export const selectRestaurantIds = (state) => state.restaurants.ids;
+export const selectRestaurantEntities = (state) => state.restaurants.entities;
 
-export const selectRestaurantEntities = createSelector(
-  [selectRestaurantsState],
-  (restaurants) => restaurants.entities
-);
-
-export const selectRestaurantById = createSelector(
-  [selectRestaurantEntities, (_, id) => id],
-  (entities, id) => entities[id]
-);
+export const selectRestaurantById = (state, id) =>
+  state.restaurants.entities[id];
 
 export const selectRestaurantsArray = createSelector(
   [selectRestaurantIds, selectRestaurantEntities],

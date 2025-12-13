@@ -17,22 +17,12 @@ const dishesSlice = createSlice({
 });
 
 // --- Селекторы ---
-const selectDishesState = (state) => state.dishes;
+export const selectDishesState = (state) => state.dishes;
 
-export const selectDishIds = createSelector(
-  [selectDishesState],
-  (dishes) => dishes.ids
-);
+export const selectDishIds = (state) => state.dishes.ids;
+export const selectDishEntities = (state) => state.dishes.entities;
 
-export const selectDishEntities = createSelector(
-  [selectDishesState],
-  (dishes) => dishes.entities
-);
-
-export const selectDishById = createSelector(
-  [selectDishEntities, (_, id) => id],
-  (entities, id) => entities[id]
-);
+export const selectDishById = (state, id) => state.dishes.entities[id];
 
 export const selectDishesArray = createSelector(
   [selectDishIds, selectDishEntities],

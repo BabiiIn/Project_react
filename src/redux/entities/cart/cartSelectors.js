@@ -1,22 +1,13 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { selectDishById } from '../dishes/dishesSlice';
 
-const selectCartState = (state) => state.cart;
+export const selectCartState = (state) => state.cart;
 
-export const selectCartIds = createSelector(
-  [selectCartState],
-  (cart) => cart.ids
-);
+export const selectCartIds = (state) => state.cart.ids;
+export const selectCartEntities = (state) => state.cart.entities;
 
-export const selectCartEntities = createSelector(
-  [selectCartState],
-  (cart) => cart.entities
-);
-
-export const selectCartItemById = createSelector(
-  [selectCartEntities, (_, id) => id],
-  (entities, id) => entities[id]
-);
+export const selectCartItemById = (state, dishId) =>
+  state.cart.entities[dishId];
 
 export const selectCartWithDishes = createSelector(
   [selectCartIds, selectCartEntities, (state) => state],

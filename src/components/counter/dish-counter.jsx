@@ -1,16 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Counter } from './counter';
 import {
   addToCart,
   removeFromCart,
   resetDish,
-  selectCartItemById,
 } from '../../redux/entities/cart/cartSlice';
+import { selectCartItemById } from '../../redux/entities/cart/cartSelectors';
 
 export const DishCounter = ({ dishId, isVisible = true }) => {
   const dispatch = useDispatch();
 
-  // Получаем объект товара из корзины через селектор
   const cartItem = useSelector((state) => selectCartItemById(state, dishId));
   const count = cartItem ? cartItem.count : 0;
 

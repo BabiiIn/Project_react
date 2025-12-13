@@ -17,22 +17,12 @@ const usersSlice = createSlice({
 });
 
 // --- Селекторы ---
-const selectUsersState = (state) => state.users;
+export const selectUsersState = (state) => state.users;
 
-export const selectUserIds = createSelector(
-  [selectUsersState],
-  (users) => users.ids
-);
+export const selectUserIds = (state) => state.users.ids;
+export const selectUserEntities = (state) => state.users.entities;
 
-export const selectUserEntities = createSelector(
-  [selectUsersState],
-  (users) => users.entities
-);
-
-export const selectUserById = createSelector(
-  [selectUserEntities, (_, id) => id],
-  (entities, id) => entities[id]
-);
+export const selectUserById = (state, id) => state.users.entities[id];
 
 export const selectUsersArray = createSelector(
   [selectUserIds, selectUserEntities],

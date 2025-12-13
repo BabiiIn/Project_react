@@ -4,7 +4,7 @@ const MAX_COUNT = 5;
 
 const initialState = {
   ids: [],
-  entities: {}, 
+  entities: {},
 };
 
 const cartSlice = createSlice({
@@ -16,11 +16,9 @@ const cartSlice = createSlice({
       const existingItem = state.entities[dishId];
 
       if (!existingItem) {
-        // если товара ещё нет в корзине
         state.ids.push(dishId);
         state.entities[dishId] = { id: dishId, count: 1 };
       } else if (existingItem.count < MAX_COUNT) {
-        // если товар уже есть — увеличиваем количество
         existingItem.count += 1;
       }
     },
@@ -51,16 +49,9 @@ const cartSlice = createSlice({
       state.entities = {};
     },
   },
-  selectors: {
-    selectCartIds: (state) => state.ids,
-    selectCartItemById: (state, id) => state.entities[id],
-    selectCartItems: (state) => state.ids.map((id) => state.entities[id]),
-  },
 });
 
 export const { addToCart, removeFromCart, resetDish, clearCart } =
   cartSlice.actions;
-export const { selectCartIds, selectCartItemById, selectCartItems } =
-  cartSlice.selectors;
 
 export default cartSlice.reducer;

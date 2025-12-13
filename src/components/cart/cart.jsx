@@ -3,6 +3,7 @@ import { useUser } from '../../context/user-context';
 import { clearCart } from '../../redux/entities/cart/cartSlice';
 import { selectCartWithDishes } from '../../redux/entities/cart/cartSelectors';
 import styles from './cart.module.css';
+import { Button } from '../button/button';
 
 export const Cart = () => {
   const { user } = useUser();
@@ -37,9 +38,13 @@ export const Cart = () => {
         <strong>Итого:</strong> {total} ₽
       </div>
 
-      <button className={styles.clearButton} onClick={() => dispatch(clearCart())}>
+      <Button
+        variant="secondary"
+        className={styles.clearButton}
+        onClick={() => dispatch(clearCart())}
+      >
         Очистить корзину
-      </button>
+      </Button>
     </div>
   );
 };

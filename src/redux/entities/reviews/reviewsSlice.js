@@ -17,22 +17,12 @@ const reviewsSlice = createSlice({
 });
 
 // --- Селекторы ---
-const selectReviewsState = (state) => state.reviews;
+export const selectReviewsState = (state) => state.reviews;
 
-export const selectReviewIds = createSelector(
-  [selectReviewsState],
-  (reviews) => reviews.ids
-);
+export const selectReviewIds = (state) => state.reviews.ids;
+export const selectReviewEntities = (state) => state.reviews.entities;
 
-export const selectReviewEntities = createSelector(
-  [selectReviewsState],
-  (reviews) => reviews.entities
-);
-
-export const selectReviewById = createSelector(
-  [selectReviewEntities, (_, id) => id],
-  (entities, id) => entities[id]
-);
+export const selectReviewById = (state, id) => state.reviews.entities[id];
 
 export const selectReviewsArray = createSelector(
   [selectReviewIds, selectReviewEntities],

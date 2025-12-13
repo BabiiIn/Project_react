@@ -1,5 +1,5 @@
-import { Review } from "./review";
-import styles from "./reviews.module.css";
+import { Review } from './review';
+import styles from './reviews.module.css';
 
 export const Reviews = ({ reviewIds = [] }) => {
   const safeReviewIds = Array.isArray(reviewIds) ? reviewIds : [];
