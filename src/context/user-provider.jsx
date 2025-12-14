@@ -1,11 +1,10 @@
-import { createContext, useState, useContext } from 'react';
-
-const UserContext = createContext();
+import { useState } from 'react';
+import { UserContext } from './user-context';
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const login = () => setUser({ name: 'NotOlga' });
+  const login = () => setUser({ id: 1, name: 'NotOlga' });
   const logout = () => setUser(null);
 
   return (
@@ -14,5 +13,3 @@ export const UserProvider = ({ children }) => {
     </UserContext.Provider>
   );
 };
-
-export const useUser = () => useContext(UserContext);

@@ -1,19 +1,18 @@
-import { Review } from "./review";
-import styles from "./reviews.module.css";
+import { Review } from './review';
+import styles from './reviews.module.css';
 
-export const Reviews = ({ reviews = [] }) => {
-  const safeReviews = Array.isArray(reviews) ? reviews : [];
+export const Reviews = ({ reviewIds = [] }) => {
+  const safeReviewIds = Array.isArray(reviewIds) ? reviewIds : [];
 
-  if (safeReviews.length === 0) {
+  if (safeReviewIds.length === 0) {
     return <p>Пока нет отзывов.</p>;
   }
 
   return (
     <ul className={styles.reviews}>
-      {safeReviews.map((review) => (
-        <Review key={review.id} review={review} />
+      {safeReviewIds.map((id) => (
+        <Review key={id} reviewId={id} />
       ))}
     </ul>
   );
 };
-

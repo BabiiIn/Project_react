@@ -1,12 +1,22 @@
-import styles from "./tab.module.css";
+import { useSelector } from 'react-redux';
+import styles from './tab.module.css';
+import { selectRestaurantById } from '../../redux/entities/restaurant/restaurantSlice';
 
-export const Tab = ({ label, isActive, onClick }) => {
+export const Tab = ({ restaurantId, isActive, onClick }) => {
+  const restaurant = useSelector((state) =>
+    selectRestaurantById(state, restaurantId)
+  );
+
+  if (!restaurant) {
+    return null;
+  }
+
   return (
     <button
-      className={`${styles.tab} ${isActive ? styles.active : ""}`}
+      className={`${styles.tab} ${isActive ? styles.active : ''}`}
       onClick={onClick}
     >
-      {label}
+      {restaurant.name}
     </button>
   );
 };
