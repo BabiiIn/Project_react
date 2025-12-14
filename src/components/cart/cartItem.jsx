@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { selectCartItemById } from '../../redux/entities/cart/cartSelectors';
 import { selectDishById } from '../../redux/entities/dishes/dishesSlice';
+import styles from './cart.module.css';
 
 export const CartItem = ({ dishId }) => {
   const item = useSelector((state) => selectCartItemById(state, dishId));
@@ -8,11 +9,13 @@ export const CartItem = ({ dishId }) => {
 
   if (!item) return null;
 
+  const subtotal = (dish?.price ?? 0) * item.count;
+
   return (
-    <li>
+    <li className={styles.item}>
       <span>{dish?.name ?? 'Неизвестное блюдо'}</span>
       <span>{item.count} шт.</span>
-      <span>{(dish?.price ?? 0) * item.count} ₽</span>
+      <span>{subtotal} ₽</span>
     </li>
   );
 };
