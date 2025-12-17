@@ -1,25 +1,63 @@
 .dish {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  background: #fff;
+  text-align: left; /* 👈 всё содержимое выравниваем влево */
 }
 
-.info {
+.header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 .name {
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 0.25rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #222;
+  text-align: left; /* 👈 название слева */
 }
 
 .price {
-  font-size: 0.9rem;
-  color: #4f46e5;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #444;
+  text-align: left; /* 👈 цена тоже слева */
+}
+
+.ingredientsSection {
+  display: grid;
+  gap: 8px;
+}
+
+.ingredientsTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  text-align: left; /* 👈 заголовок списка слева */
+}
+
+.ingredients {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+  color: #444;
+  font-size: 0.95rem;
+  text-align: left; /* 👈 список слева */
+}
+
+.ingredients li {
+  margin-bottom: 4px;
 }
 
 .counter {
-  margin-left: 1rem;
+  display: flex;
+  justify-content: flex-start; /* 👈 кнопки слева */
+  align-items: center;
+  margin-top: 8px;
+  width: 100%; /* 👈 растягиваем контейнер */
+  text-align: left; /* 👈 текст и кнопки слева */
 }

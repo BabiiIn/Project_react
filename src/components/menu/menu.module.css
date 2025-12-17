@@ -1,8 +1,43 @@
 .menu {
-  list-style: none;
+  display: grid;
+  gap: 12px;
   padding: 0;
-  margin: 1rem 0;
+  list-style: none;
+}
+
+.link {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  flex-direction: column; /* название сверху, цена снизу */
+  align-items: flex-start;
+  gap: 6px;
+  padding: 14px 18px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.link:hover {
+  background: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transform: scale(1.02); /* 👈 лёгкое увеличение карточки */
+}
+
+.name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #222;
+}
+
+.price {
+  font-size: 0.95rem;
+  color: #555;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.link:hover .price {
+  color: #0077cc; /* 👈 подсветка цены при наведении */
 }
