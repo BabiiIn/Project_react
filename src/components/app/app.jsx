@@ -1,24 +1,39 @@
-import { Layout } from '../layout/layout';
-import { RestaurantsPage } from '../pages/restaurants-page';
-import styles from './app.module.css';
-import { ThemeProvider } from '../../context/theme-provider';   
-import { Header } from '../header/header';
-import { UserProvider } from '../../context/user-provider';     
 import { Provider } from 'react-redux';
 import { store } from '../../redux/store';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
+import { Layout } from '../layout/layout';
+import { HomePage } from '../../pages/home-page';
+import { RestaurantsPage } from '../../pages/restaurants-page';
+import { RestaurantPage } from '../../pages/restaurant-page';
+import { DishPage } from '../../pages/dish-page';
+import { ThemeProvider } from '../../context/theme-provider';
+import { UserProvider } from '../../context/user-provider';
+import { MenuPage } from '../../pages/menu-page';
+import { ReviewsPage } from '../../pages/reviews-page';
 
-export const App = ({ title, debugScroll = false }) => {
+export const App = () => {
   return (
-    <Provider store={store}>
-      <ThemeProvider>
+    <BrowserRouter>
+      <Provider store={store}>
         <UserProvider>
-          <Layout debugScroll={debugScroll}>
-            <Header />
-            <h1 className={styles.appTitle}>{title}</h1>
-            <RestaurantsPage />
-          </Layout>
+          <ThemeProvider>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route index element={<HomePage />} />
+                <Route path="/restaurants" element={<RestaurantsPage />}>
+                  <Route index element={<div>Выберите ресторан</div>} />
+                  <Route path=":restaurantId" element={<RestaurantPage />}>
+                    <Route index element={<Navigate to="menu" replace />} />
+                    <Route path="menu" element={<MenuPage />} />
+                    <Route path="reviews" element={<ReviewsPage />} />
+                  </Route>
+                </Route>
+                <Route path="/dish/:dishId" element={<DishPage />} />
+              </Route>
+            </Routes>
+          </ThemeProvider>
         </UserProvider>
-      </ThemeProvider>
-    </Provider>
+      </Provider>
+    </BrowserRouter>
   );
 };

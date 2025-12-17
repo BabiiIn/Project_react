@@ -2,17 +2,18 @@ import { ScrollProgressContainer } from '../scroll-progress/scrollProgressContai
 import { DebugScrollBlock } from '../scroll-progress/debugScrollBlock';
 import styles from './layout.module.css';
 import { Cart } from '../cart/cart';
+import { Outlet } from 'react-router';
+import { Header } from '../header/header';
 
-export const Layout = ({ children, debugScroll = false }) => {
+export const Layout = ({ debugScroll = true }) => {
   return (
     <div className={styles.layout}>
       <ScrollProgressContainer />
+      <Header />
 
-      <header className={styles.header}>
-        <h1>My App: Delivery from Restaurants</h1>
-      </header>
-
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>
+        <Outlet />
+      </main>
 
       <Cart />
       {debugScroll && <DebugScrollBlock height={3000} />}

@@ -1,4 +1,3 @@
-// src/components/cart/cart.jsx
 import { useSelector, useDispatch } from 'react-redux';
 import { useUser } from '../../context/user-context';
 import { clearCart } from '../../redux/entities/cart/cartSlice';
