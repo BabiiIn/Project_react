@@ -1,0 +1,79 @@
+.dish {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.price {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+}
+
+.ingredients {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.ingredients li {
+  margin-bottom: 4px;
+}
+
+/* --- Блок количества и кнопок --- */
+.counter {
+  margin-top: 12px;          /* отступ от списка ингредиентов */
+  display: flex;
+  justify-content: flex-start; /* выравнивание по левому краю */
+  align-items: center;
+  gap: 0.75rem;               /* расстояние между элементами */
+}
+
+.label {
+  font-weight: 600;
+  color: #111827;
+  font-size: 0.95rem;
+}
+
+.value {
+  min-width: 2rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #4f46e5;
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.controls button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.controls button:hover {
+  background-color: #e5e7eb; /* лёгкий серый фон при наведении */
+}
