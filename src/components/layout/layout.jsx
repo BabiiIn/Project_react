@@ -5,7 +5,7 @@ import { Cart } from '../cart/cart';
 import { Outlet } from 'react-router';
 import { Header } from '../header/header';
 
-export const Layout = ({ debugScroll = true }) => {
+export const Layout = ({ debugScroll = false }) => {
   return (
     <div className={styles.layout}>
       <ScrollProgressContainer />
@@ -18,7 +18,7 @@ export const Layout = ({ debugScroll = true }) => {
       <Cart />
       {debugScroll && <DebugScrollBlock height={3000} />}
       <footer className={styles.footer}>
-        <p>My App Footer</p>
+        <p>© 2025 My App — All rights reserved</p>
       </footer>
     </div>
   );
