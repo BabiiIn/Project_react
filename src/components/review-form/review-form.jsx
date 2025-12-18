@@ -9,10 +9,15 @@ import { ReviewCounter } from '../counter/review-counter';
 import styles from './reviewForm.module.css';
 import { Button } from '../button/button';
 import { useUser } from '../../context/user-context';
+import { useEffect } from 'react';
 
 export const ReviewForm = ({ restaurantId }) => {
   const { form, dispatch } = useForm();
   const { user } = useUser();
+
+  useEffect(() => {
+    dispatch({ type: CLEAR_ACTION });
+  }, [restaurantId, dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

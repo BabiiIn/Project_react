@@ -1,0 +1,8 @@
+/* src/components/tabs/tabs.module.css */
+.root {
+  display: flex;
+  gap: 12px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}

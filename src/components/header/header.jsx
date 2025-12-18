@@ -5,7 +5,7 @@ import { UserControls } from './userControls';
 export const Header = () => {
   return (
     <header className={styles.header}>
-      <h1 className={styles.title}>My App</h1>
+      <h1 className={styles.title}>My App: Delivery from Restaurants</h1>
       <ThemeSwitcher />
       <UserControls />
     </header>
