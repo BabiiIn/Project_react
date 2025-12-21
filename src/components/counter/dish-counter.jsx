@@ -6,6 +6,7 @@ import {
   resetDish,
 } from '../../redux/entities/cart/cartSlice';
 import { selectCartItemById } from '../../redux/entities/cart/cartSelectors';
+import { getDishById } from '../../redux/entities/dishes/get-dish-by-id';
 
 export const DishCounter = ({ dishId, isVisible = true }) => {
   const dispatch = useDispatch();
@@ -17,12 +18,25 @@ export const DishCounter = ({ dishId, isVisible = true }) => {
     return null;
   }
 
+  const handleIncrement = () => {
+    dispatch(addToCart(dishId));
+    dispatch(getDishById(dishId));
+  };
+
+  const handleDecrement = () => {
+    dispatch(removeFromCart(dishId));
+  };
+
+  const handleReset = () => {
+    dispatch(resetDish(dishId));
+  };
+
   return (
     <Counter
       count={count}
-      onIncrement={() => dispatch(addToCart(dishId))}
-      onDecrement={() => dispatch(removeFromCart(dishId))}
-      onReset={() => dispatch(resetDish(dishId))}
+      onIncrement={handleIncrement}
+      onDecrement={handleDecrement}
+      onReset={handleReset}
     />
   );
 };
