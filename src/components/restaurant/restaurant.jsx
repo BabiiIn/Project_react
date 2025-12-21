@@ -14,7 +14,7 @@ export const Restaurant = ({ id, name }) => {
         <TabLink to={`/restaurants/${id}/reviews`}>Отзывы</TabLink>
       </Tabs>
 
-      <Outlet />
+      {/* <Outlet /> */}
     </section>
   );
 };
