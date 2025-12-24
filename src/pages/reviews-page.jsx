@@ -31,9 +31,12 @@ export const ReviewsPage = () => {
   useEffect(() => {
     if (restaurantId) {
       dispatch(getReviewsByRestaurantId(restaurantId));
-      dispatch(getUsers());
     }
-  }, [dispatch, restaurantId]);
+  }, [restaurantId, dispatch]);
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
 
   if (status === REQUEST_STATUS.PENDING || status === REQUEST_STATUS.IDLE) {
     return <p>Загрузка отзывов…</p>;
