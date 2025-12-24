@@ -1,33 +1,57 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit';
-import { normalizedReviews } from '../../../constants/normalized-mock';
-import { normalizeArray } from '../../../utils/normalize';
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
+import { getReviewsByRestaurantId } from './get-reviews-by-restaurant-id';
+import { REQUEST_STATUS } from '../../constants/request-status';
 
-const initialState = normalizeArray(normalizedReviews);
+const adapter = createEntityAdapter();
 
-const reviewsSlice = createSlice({
-  name: 'reviews',
-  initialState,
-  reducers: {
-    addReview: (state, action) => {
-      const review = action.payload;
-      state.ids.push(review.id);
-      state.entities[review.id] = review;
-    },
-  },
+const initialState = adapter.getInitialState({
+  requestStatus: {},
+  error: {},
 });
 
-// --- Селекторы ---
-export const selectReviewsState = (state) => state.reviews;
+export const reviewsSlice = createSlice({
+  name: 'reviews',
+  initialState,
+  selectors: {
+    selectReviewIds: (state) => state.ids,
+    selectReviewById: (state, id) => state.entities[id],
+    selectReviewEntities: (state) => state.entities,
 
-export const selectReviewIds = (state) => state.reviews.ids;
-export const selectReviewEntities = (state) => state.reviews.entities;
+    selectRequestStatus: (state, restaurantId) =>
+      state.requestStatus[restaurantId] ?? REQUEST_STATUS.IDLE,
 
-export const selectReviewById = (state, id) => state.reviews.entities[id];
+    selectRequestError: (state, restaurantId) =>
+      (restaurantId ? state.error[restaurantId] : null) ?? null,
+  },
+  extraReducers: (builder) =>
+    builder
+      .addCase(getReviewsByRestaurantId.pending, (state, action) => {
+        const restaurantId = action.meta.arg;
+        state.requestStatus[restaurantId] = REQUEST_STATUS.PENDING;
+        state.error[restaurantId] = null;
+      })
+      .addCase(
+        getReviewsByRestaurantId.fulfilled,
+        (state, { payload, meta }) => {
+          const restaurantId = meta.arg;
+          state.requestStatus[restaurantId] = REQUEST_STATUS.FULFILLED;
 
-export const selectReviewsArray = createSelector(
-  [selectReviewIds, selectReviewEntities],
-  (ids, entities) => ids.map((id) => entities[id])
-);
+          adapter.upsertMany(state, payload);
+        }
+      )
+      .addCase(getReviewsByRestaurantId.rejected, (state, action) => {
+        const restaurantId = action.meta.arg;
+        state.requestStatus[restaurantId] = REQUEST_STATUS.REJECTED;
+        state.error[restaurantId] = action.payload ?? 'Request failed';
+      }),
+});
 
-export const { addReview } = reviewsSlice.actions;
+export const {
+  selectReviewIds,
+  selectReviewById,
+  selectReviewEntities,
+  selectRequestStatus,
+  selectRequestError,
+} = reviewsSlice.selectors;
+
 export default reviewsSlice.reducer;

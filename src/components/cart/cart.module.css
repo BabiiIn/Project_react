@@ -43,7 +43,7 @@
 .clearButton {
   margin-top: 12px;
   padding: 8px 12px;
-  background-color: #f44336; /* красная кнопка */
+  background-color: #f44336; 
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -55,3 +55,10 @@
 .clearButton:hover {
   background-color: #d32f2f;
 }
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+

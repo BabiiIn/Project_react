@@ -19,8 +19,11 @@
 }
 
 .footer {
-  background-color: #111827;
+  margin-top: 20px;
+  padding: 16px;
+  background-color: #4caf50; 
   color: #fff;
-  padding: 1rem;
   text-align: center;
+  font-size: 1rem;
+  border-top: 3px solid #2e7d32;
 }

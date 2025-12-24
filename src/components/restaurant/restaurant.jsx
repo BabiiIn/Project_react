@@ -13,8 +13,6 @@ export const Restaurant = ({ id, name }) => {
         <TabLink to={`/restaurants/${id}/menu`}>Меню</TabLink>
         <TabLink to={`/restaurants/${id}/reviews`}>Отзывы</TabLink>
       </Tabs>
-
-      <Outlet />
     </section>
   );
 };

@@ -1,33 +1,47 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit';
-import { normalizedUsers } from '../../../constants/normalized-mock';
-import { normalizeArray } from '../../../utils/normalize';
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
+import { getUsers } from './get-users';
+import { REQUEST_STATUS } from '../../constants/request-status';
 
-const initialState = normalizeArray(normalizedUsers);
+const adapter = createEntityAdapter();
 
-const usersSlice = createSlice({
-  name: 'users',
-  initialState,
-  reducers: {
-    addUser: (state, action) => {
-      const user = action.payload;
-      state.ids.push(user.id);
-      state.entities[user.id] = user;
-    },
-  },
+const initialState = adapter.getInitialState({
+  requestStatus: REQUEST_STATUS.IDLE,
+  error: null,
 });
 
-// --- Селекторы ---
-export const selectUsersState = (state) => state.users;
+export const usersSlice = createSlice({
+  name: 'users',
+  initialState,
+  selectors: {
+    selectUserIds: (state) => state.ids,
+    selectUserById: (state, id) => state.entities[id],
+    selectUserEntities: (state) => state.entities,
+    selectRequestStatus: (state) => state.requestStatus,
+    selectRequestError: (state) => state.error,
+  },
+  extraReducers: (builder) =>
+    builder
+      .addCase(getUsers.pending, (state) => {
+        state.requestStatus = REQUEST_STATUS.PENDING;
+        state.error = null;
+      })
+      .addCase(getUsers.fulfilled, (state, { payload }) => {
+        state.requestStatus = REQUEST_STATUS.FULFILLED;
 
-export const selectUserIds = (state) => state.users.ids;
-export const selectUserEntities = (state) => state.users.entities;
+        adapter.setAll(state, payload);
+      })
+      .addCase(getUsers.rejected, (state, action) => {
+        state.requestStatus = REQUEST_STATUS.REJECTED;
+        state.error = action.payload ?? 'Request failed';
+      }),
+});
 
-export const selectUserById = (state, id) => state.users.entities[id];
+export const {
+  selectUserIds,
+  selectUserById,
+  selectUserEntities,
+  selectRequestStatus,
+  selectRequestError,
+} = usersSlice.selectors;
 
-export const selectUsersArray = createSelector(
-  [selectUserIds, selectUserEntities],
-  (ids, entities) => ids.map((id) => entities[id])
-);
-
-export const { addUser } = usersSlice.actions;
 export default usersSlice.reducer;
