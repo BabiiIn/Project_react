@@ -13,9 +13,9 @@ export const DishContainer = ({ id }) => {
   const dispatch = useDispatch();
   const dish = useSelector((state) => selectDishById(state, id));
 
-  const status = useSelector((state) => selectRequestStatus(state));
+  const status = useSelector(selectRequestStatus);
 
-  const error = useSelector((state) => selectRequestError(state));
+  const error = useSelector(selectRequestError);
 
   useEffect(() => {
     dispatch(getDishById(id));
