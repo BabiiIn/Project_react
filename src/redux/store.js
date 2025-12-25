@@ -15,19 +15,6 @@ const loggerMiddleware = (_store) => (next) => (action) => {
   return next(action);
 };
 
-// export const store = configureStore({
-//   reducer: {
-//     restaurants: restaurantsReducer,
-//     dishes: dishesReducer,
-//     reviews: reviewsReducer,
-//     users: usersReducer,
-//     cart: cartReducer,
-//   },
-//   middleware: (getDefaultMiddlewares) =>
-//     getDefaultMiddlewares().concat(loggerMiddleware),
-// });
-
-
 export const store = configureStore({
   reducer: {
     restaurants: restaurantsReducer,
@@ -36,12 +23,8 @@ export const store = configureStore({
     users: usersReducer,
     cart: cartReducer,
 
-    // добавляем RTK Query reducer
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddlewares) =>
-    getDefaultMiddlewares()
-      // добавляем RTK Query middleware
-      .concat(api.middleware)
-      .concat(loggerMiddleware),
+    getDefaultMiddlewares().concat(api.middleware).concat(loggerMiddleware),
 });
