@@ -35,3 +35,53 @@
   color: #374151;
   line-height: 1.4;
 }
+
+
+/* 
+.muiButton {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.muiButton:hover {
+  background-color: #1565c0;
+}
+
+.muiButton:active {
+  background-color: #0d47a1;
+} */
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.deleteButton {
+  background-color: #ffdddd;
+  border: 1px solid #ffaaaa;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.deleteButton:hover {
+  background-color: #ffcccc;
+  border-color: #ff8888;
+}
+
+.deleteButton:active {
+  background-color: #ffbbbb;
+}
+
+
+
+
