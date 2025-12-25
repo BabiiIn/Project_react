@@ -5,6 +5,7 @@ import { Outlet } from 'react-router';
 export const RestaurantPage = () => {
   const { restaurantId } = useParams();
 
+  console.log('RestaurantPage → restaurantId:', restaurantId);
   return (
     <>
       <RestaurantContainer id={restaurantId} />
