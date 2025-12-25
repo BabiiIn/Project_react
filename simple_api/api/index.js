@@ -93,5 +93,34 @@ router.patch("/review/:reviewId", (req, res, _next) => {
 router.get("/users", (req, res, _next) => {
   reply(res, users);
 });
+// Добавление маршрута DELETE
+router.delete("/review/:reviewId", (req, res, _next) => {
+  const reviewId = req.params?.reviewId;
+
+  if (!reviewId) {
+    return reply(res, { error: "No reviewId provided" }, 400);
+  }
+
+  // Находим отзыв
+  const reviewIndex = reviews.findIndex((r) => r.id === reviewId);
+  if (reviewIndex === -1) {
+    return reply(res, { error: "Review not found" }, 404);
+  }
+
+  const deletedReview = reviews[reviewIndex];
+
+  // Удаляем отзыв из массива reviews
+  reviews.splice(reviewIndex, 1);
+
+  // Удаляем ID отзыва из restaurant.reviews
+  restaurants.forEach((restaurant) => {
+    restaurant.reviews = restaurant.reviews.filter(
+      (id) => id !== reviewId
+    );
+  });
+
+  reply(res, deletedReview);
+});
+
 
 module.exports = router;
