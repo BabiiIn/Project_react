@@ -1,33 +1,60 @@
+// import { Link } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
+// import { selectDishEntities } from '../../redux/entities/dishes/dishesSlice';
+// import styles from './menu.module.css';
+// import cardStyles from './card.module.css';
+
+// export const Menu = ({ dishIds = [] }) => {
+//   const safeDishIds = Array.isArray(dishIds) ? dishIds : [];
+
+//   const dishEntities = useSelector(selectDishEntities);
+
+//   if (safeDishIds.length === 0) {
+//     return <p>Меню пока пусто.</p>;
+//   }
+
+//   return (
+//     <ul className={styles.menu}>
+//       {safeDishIds.map((id) => {
+//         const dish = dishEntities[id];
+//         if (!dish) return null;
+
+//         return (
+//           <li key={id} className={cardStyles.card}>
+//             <Link to={`/dish/${id}`} className={styles.link}>
+//               <span className={styles.name}>{dish.name}</span>
+//               <span className={styles.price}>{dish.price} ₽</span>
+//             </Link>
+//           </li>
+//         );
+//       })}
+//     </ul>
+//   );
+// };
+
+
+// src/components/menu/menu.jsx
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectDishEntities } from '../../redux/entities/dishes/dishesSlice';
 import styles from './menu.module.css';
 import cardStyles from './card.module.css';
 
-export const Menu = ({ dishIds = [] }) => {
-  const safeDishIds = Array.isArray(dishIds) ? dishIds : [];
+export const Menu = ({ dishes = [] }) => {
+  const safeDishes = Array.isArray(dishes) ? dishes : [];
 
-  const dishEntities = useSelector(selectDishEntities);
-
-  if (safeDishIds.length === 0) {
+  if (safeDishes.length === 0) {
     return <p>Меню пока пусто.</p>;
   }
 
   return (
     <ul className={styles.menu}>
-      {safeDishIds.map((id) => {
-        const dish = dishEntities[id];
-        if (!dish) return null;
-
-        return (
-          <li key={id} className={cardStyles.card}>
-            <Link to={`/dish/${id}`} className={styles.link}>
-              <span className={styles.name}>{dish.name}</span>
-              <span className={styles.price}>{dish.price} ₽</span>
-            </Link>
-          </li>
-        );
-      })}
+      {safeDishes.map((dish) => (
+        <li key={dish.id} className={cardStyles.card}>
+          <Link to={`/dish/${dish.id}`} className={styles.link}>
+            <span className={styles.name}>{dish.name}</span>
+            <span className={styles.price}>{dish.price} ₽</span>
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 };
