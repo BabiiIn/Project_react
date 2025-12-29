@@ -4,6 +4,8 @@ import {
   useGetReviewsByRestaurantIdQuery,
   useGetUsersQuery,
   useDeleteReviewMutation,
+  useAddReviewMutation,
+  useUpdateReviewMutation,
 } from '../redux/services/api';
 import { Reviews } from '../components/reviews/reviews';
 import { ReviewForm } from '../components/review-form/review-form';
@@ -14,20 +16,16 @@ export const ReviewsPage = () => {
   const { restaurantId } = useParams();
   const { user } = useUser();
 
-  // удаление отзыва
   const [deleteReview] = useDeleteReviewMutation();
   const handleDelete = async (reviewId) => {
     await deleteReview(reviewId);
   };
 
-  // состояние: какой отзыв редактируем
   const [editingReview, setEditingReview] = useState(null);
 
-  // ресторан
   const { data: restaurant, isLoading: isRestaurantLoading } =
     useGetRestaurantByIdQuery(restaurantId);
 
-  // отзывы
   const {
     data: reviews,
     isLoading: isReviewsLoading,
@@ -35,8 +33,13 @@ export const ReviewsPage = () => {
     error,
   } = useGetReviewsByRestaurantIdQuery(restaurantId);
 
-  // пользователи
   const { data: users = [], isLoading: isUsersLoading } = useGetUsersQuery();
+
+  const [addReview, { isLoading: isAdding }] = useAddReviewMutation();
+  const [updateReview, { isLoading: isUpdating }] = useUpdateReviewMutation();
+
+  const handleAddReview = (data) => addReview(data);
+  const handleUpdateReview = (data) => updateReview(data);
 
   if (isRestaurantLoading || isReviewsLoading || isUsersLoading) {
     return <p>Загрузка отзывов…</p>;
@@ -57,7 +60,7 @@ export const ReviewsPage = () => {
       <Reviews
         reviews={reviews}
         users={users}
-        onEdit={(review) => setEditingReview(review)}
+        onEdit={setEditingReview}
         onDelete={handleDelete}
       />
 
@@ -66,6 +69,10 @@ export const ReviewsPage = () => {
           restaurantId={restaurantId}
           editingReview={editingReview}
           onFinishEdit={() => setEditingReview(null)}
+          onAddReview={handleAddReview}
+          onUpdateReview={handleUpdateReview}
+          isAdding={isAdding}
+          isUpdating={isUpdating}
         />
       )}
     </div>
