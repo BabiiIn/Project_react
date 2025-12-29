@@ -6,15 +6,7 @@ export const RestaurantContainer = ({ id }) => {
     data: restaurant,
     isLoading,
     isError,
-    error,
   } = useGetRestaurantByIdQuery(id);
-
-  console.log('restaurant from RTK Query:', restaurant);
-  console.log('error:', error);
-  console.log('isError:', isError);
-  console.log('isLoading:', isLoading);
-  console.log('RENDER RestaurantContainer, id =', id);
-  console.log('RestaurantContainer FILE PATH:', import.meta.url);
 
   if (isLoading) {
     return <p>Загрузка ресторана…</p>;
