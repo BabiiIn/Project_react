@@ -9,67 +9,58 @@ import { ReviewCounter } from '../counter/review-counter';
 import styles from './reviewForm.module.css';
 import { Button } from '../button/button';
 import { useUser } from '../../context/user-context';
-import { useEffect } from 'react';
-import {
-  useAddReviewMutation,
-  useUpdateReviewMutation,
-} from '../../redux/services/api';
 
-export const ReviewForm = ({ restaurantId, editingReview, onFinishEdit }) => {
-  const { form, dispatch } = useForm();
+export const ReviewForm = ({
+  restaurantId,
+  editingReview,
+  onFinishEdit,
+  onAddReview,
+  onUpdateReview,
+  isAdding,
+  isUpdating,
+}) => {
   const { user } = useUser();
 
-  const [addReview, { isLoading: isAdding }] = useAddReviewMutation();
-  const [updateReview, { isLoading: isUpdating }] = useUpdateReviewMutation();
+  const initialValues = editingReview
+    ? {
+        name: editingReview.name || '',
+        text: editingReview.text,
+        rating: editingReview.rating,
+      }
+    : {
+        name: '',
+        text: '',
+        rating: 5,
+      };
 
-  // Если редактируем — заполняем форму
-  useEffect(() => {
-    if (editingReview) {
-      dispatch({ type: UPDATE_NAME_ACTION, payload: editingReview.name || '' });
-      dispatch({ type: UPDATE_TEXT_ACTION, payload: editingReview.text });
-      dispatch({
-        type: UPDATE_RATING_ACTION,
-        payload: editingReview.rating,
-      });
-    } else {
-      dispatch({ type: CLEAR_ACTION });
-    }
-  }, [editingReview, dispatch]);
+  const { form, dispatch } = useForm(initialValues, editingReview?.id);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) return;
 
-    if (editingReview) {
-      // режим редактирования
-      await updateReview({
-        reviewId: editingReview.id,
-        review: {
-          restaurantId,
-          userId: String(user.id),
-          text: form.text,
-          rating: form.rating,
-        },
-      });
-
-      // очищаем форму после редактирования
-      dispatch({ type: CLEAR_ACTION });
-      onFinishEdit();
-      return;
-    }
-
-    // режим создания
-    await addReview({
+    const payload = {
       restaurantId,
       review: {
-        restaurantId,
         userId: String(user.id),
         text: form.text,
         rating: form.rating,
       },
-    });
+    };
 
-    dispatch({ type: CLEAR_ACTION });
+    if (editingReview) {
+      await onUpdateReview({
+        reviewId: editingReview.id,
+        review: payload.review,
+      });
+
+      dispatch({ type: CLEAR_ACTION, payload: initialValues });
+      onFinishEdit();
+      return;
+    }
+
+    await onAddReview(payload);
+    dispatch({ type: CLEAR_ACTION, payload: initialValues });
   };
 
   if (!user) return null;
@@ -136,7 +127,7 @@ export const ReviewForm = ({ restaurantId, editingReview, onFinishEdit }) => {
           type="button"
           variant="secondary"
           onClick={() => {
-            dispatch({ type: CLEAR_ACTION });
+            dispatch({ type: CLEAR_ACTION, payload: initialValues });
             onFinishEdit();
           }}
         >
