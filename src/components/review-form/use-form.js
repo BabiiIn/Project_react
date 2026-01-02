@@ -35,6 +35,7 @@ export const useForm = (initialValues, key) => {
 
   useEffect(() => {
     dispatch({ type: CLEAR_ACTION, payload: initialValues });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);
 
   return { form, dispatch };
