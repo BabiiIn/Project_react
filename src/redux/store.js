@@ -1,4 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { api } from './services/api';
+
 import restaurantsReducer from './entities/restaurant/restaurantsSlice';
 import dishesReducer from './entities/dishes/dishesSlice';
 import reviewsReducer from './entities/reviews/reviewsSlice';
@@ -20,7 +22,9 @@ export const store = configureStore({
     reviews: reviewsReducer,
     users: usersReducer,
     cart: cartReducer,
+
+    [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddlewares) =>
-    getDefaultMiddlewares().concat(loggerMiddleware),
+    getDefaultMiddlewares().concat(api.middleware).concat(loggerMiddleware),
 });

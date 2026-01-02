@@ -1,5 +1,9 @@
 import { useDispatch } from 'react-redux';
-import { addToCart, removeFromCart, resetDish } from '../redux/entities/cart/cartSlice';
+import {
+  addToCart,
+  removeFromCart,
+  resetDish,
+} from '../redux/entities/cart/cartSlice';
 
 export const useCartActions = () => {
   const dispatch = useDispatch();

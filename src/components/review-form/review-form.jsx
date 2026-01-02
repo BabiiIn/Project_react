@@ -9,38 +9,76 @@ import { ReviewCounter } from '../counter/review-counter';
 import styles from './reviewForm.module.css';
 import { Button } from '../button/button';
 import { useUser } from '../../context/user-context';
-import { useEffect } from 'react';
 
-export const ReviewForm = ({ restaurantId }) => {
-  const { form, dispatch } = useForm();
+export const ReviewForm = ({
+  restaurantId,
+  editingReview,
+  onFinishEdit,
+  onAddReview,
+  onUpdateReview,
+  isAdding,
+  isUpdating,
+}) => {
   const { user } = useUser();
 
-  useEffect(() => {
-    dispatch({ type: CLEAR_ACTION });
-  }, [restaurantId, dispatch]);
+  const initialValues = editingReview
+    ? {
+        name: editingReview.name || '',
+        text: editingReview.text,
+        rating: editingReview.rating,
+      }
+    : {
+        name: '',
+        text: '',
+        rating: 5,
+      };
 
-  const handleSubmit = (e) => {
+  const { form, dispatch } = useForm(initialValues, editingReview?.id);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Отзыв для ресторана:', restaurantId);
-    console.log('Введённые данные:', form);
+    if (!user) return;
 
-    // В будущем здесь будет отправка отзыва на сервер
-    dispatch({ type: CLEAR_ACTION });
+    const payload = {
+      restaurantId,
+      review: {
+        userId: String(user.id),
+        text: form.text,
+        rating: form.rating,
+      },
+    };
+
+    if (editingReview) {
+      await onUpdateReview({
+        reviewId: editingReview.id,
+        review: payload.review,
+      });
+
+      dispatch({ type: CLEAR_ACTION, payload: initialValues });
+      onFinishEdit();
+      return;
+    }
+
+    await onAddReview(payload);
+    dispatch({ type: CLEAR_ACTION, payload: initialValues });
   };
 
-  if (!user) {
-    return null;
-  }
+  if (!user) return null;
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
+      <h4>{editingReview ? 'Редактировать отзыв' : 'Добавить отзыв'}</h4>
+
       <label>
         Имя:
         <input
           type="text"
           value={form.name}
           onChange={(e) =>
-            dispatch({ type: UPDATE_NAME_ACTION, payload: e.target.value })
+            dispatch({
+              type: UPDATE_NAME_ACTION,
+              payload: e.target.value,
+            })
           }
         />
       </label>
@@ -50,7 +88,10 @@ export const ReviewForm = ({ restaurantId }) => {
         <textarea
           value={form.text}
           onChange={(e) =>
-            dispatch({ type: UPDATE_TEXT_ACTION, payload: e.target.value })
+            dispatch({
+              type: UPDATE_TEXT_ACTION,
+              payload: e.target.value,
+            })
           }
         />
       </label>
@@ -59,21 +100,38 @@ export const ReviewForm = ({ restaurantId }) => {
         <ReviewCounter
           value={form.rating}
           onChange={(newValue) =>
-            dispatch({ type: UPDATE_RATING_ACTION, payload: newValue })
+            dispatch({
+              type: UPDATE_RATING_ACTION,
+              payload: newValue,
+            })
           }
         />
       </label>
 
       <div className={styles.buttons}>
-        <Button type="submit" variant="primary">
-          Отправить
+        <Button
+          type="submit"
+          variant="primary"
+          disabled={isAdding || isUpdating}
+        >
+          {editingReview
+            ? isUpdating
+              ? 'Сохранение…'
+              : 'Сохранить'
+            : isAdding
+              ? 'Отправка…'
+              : 'Отправить'}
         </Button>
+
         <Button
           type="button"
           variant="secondary"
-          onClick={() => dispatch({ type: CLEAR_ACTION })}
+          onClick={() => {
+            dispatch({ type: CLEAR_ACTION, payload: initialValues });
+            onFinishEdit();
+          }}
         >
-          Очистить
+          Отмена
         </Button>
       </div>
     </form>
