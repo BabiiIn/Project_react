@@ -19,3 +19,10 @@
   font-weight: 600;
   color: #374151;
 }
+
+.cartButton {
+  margin-left: 16px;
+  padding: 6px 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
